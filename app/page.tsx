@@ -1,7 +1,6 @@
 export default function HomePage() {
   return (
     <main className="relative min-h-screen overflow-hidden bg-[#101B3D] text-white">
-      {/* Background Video */}
       <video
         autoPlay
         muted
@@ -12,38 +11,55 @@ export default function HomePage() {
         <source src="/twcc-hero-video.mp4" type="video/mp4" />
       </video>
 
-      {/* Dark Overlay */}
-      <div className="absolute inset-0 bg-[#101B3D]/75" />
+      <div className="absolute inset-0 bg-[#101B3D]/80" />
 
-      {/* Page Content */}
-      <section className="relative z-10 flex min-h-screen items-center justify-center px-4 py-10">
-        <div className="max-w-3xl text-center">
-          <p className="text-sm font-semibold uppercase tracking-[0.3em] text-[#D4AF37]">
+      <header className="absolute left-0 right-0 top-0 z-20 px-4 py-5">
+        <div className="mx-auto flex max-w-6xl items-center justify-between">
+          <div className="flex h-16 w-16 items-center justify-center rounded-2xl border border-[#D4AF37]/70 bg-white/10 text-base font-black tracking-[0.12em] text-[#D4AF37] shadow-lg backdrop-blur-xl sm:h-20 sm:w-20 sm:text-lg">
             TWCC
-          </p>
+          </div>
 
-          <h1 className="mt-5 text-4xl font-bold leading-tight sm:text-6xl">
-            The World Class Choir
-          </h1>
+          <a
+            href="/login"
+            className="rounded-full border border-white/25 bg-white/10 px-6 py-3 text-sm font-semibold text-white backdrop-blur-xl transition hover:border-[#D4AF37] hover:bg-[#D4AF37] hover:text-[#101B3D]"
+          >
+            Login
+          </a>
+        </div>
+      </header>
 
-          <p className="mt-5 text-base leading-7 text-white/80 sm:text-lg">
-            One choir. One sound. One platform for announcements, rehearsals,
-            attendance, welfare, songs, gallery, and communication.
-          </p>
+      <section className="relative z-10 flex min-h-screen items-center justify-center px-4 py-24">
+        <div className="w-full max-w-5xl">
+          <div className="mx-auto max-w-3xl rounded-[2rem] border border-white/15 bg-white/10 p-8 text-center shadow-2xl backdrop-blur-xl sm:p-12">
+            <h1 className="text-4xl font-bold leading-tight text-white sm:text-6xl">
+              The World Class Choir
+            </h1>
 
-          <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+            <p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-white/80 sm:text-2xl">
+              Called to worship, chosen to serve.
+            </p>
+          </div>
+
+          <div className="mx-auto mt-6 flex max-w-3xl flex-col items-center justify-between gap-4 rounded-3xl border border-white/10 bg-white/10 px-6 py-5 text-center backdrop-blur-xl sm:flex-row sm:text-left">
+            <div>
+              <p className="text-sm font-semibold text-[#D4AF37]">
+                Follow us on Instagram
+              </p>
+
+              <p className="mt-1 text-sm text-white/70">
+                Stay connected with TWCC updates, service moments, and choir
+                highlights.
+              </p>
+            </div>
+
             <a
-              href="/login"
-              className="rounded-full bg-[#D4AF37] px-7 py-3 text-sm font-bold text-[#101B3D]"
+              href="https://www.instagram.com/twcchoir/"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 rounded-full border border-[#D4AF37] px-6 py-3 text-sm font-bold text-[#D4AF37] transition hover:bg-[#D4AF37] hover:text-[#101B3D]"
             >
-              Login
-            </a>
-
-            <a
-              href="/dashboard"
-              className="rounded-full border border-white px-7 py-3 text-sm font-semibold text-white"
-            >
-              Open Dashboard
+              <span className="text-lg">◎</span>
+              <span>@twcchoir</span>
             </a>
           </div>
         </div>
