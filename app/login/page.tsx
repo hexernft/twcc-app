@@ -45,20 +45,38 @@ export default function LoginPage() {
         <source src="/twcc-hero-video.mp4" type="video/mp4" />
       </video>
 
-      <div className="absolute inset-0 bg-[#101B3D]/75" />
+      <div className="absolute inset-0 bg-[#101B3D]/80" />
 
-      <section className="relative z-10 flex min-h-screen items-center justify-center px-4 py-10">
-        <div className="w-full max-w-md rounded-3xl border border-white/20 bg-white/15 p-8 shadow-2xl backdrop-blur-xl">
+      <header className="absolute left-0 right-0 top-0 z-20 px-4 py-5">
+        <div className="mx-auto flex max-w-6xl items-center justify-between">
+          <a
+            href="/"
+            className="flex h-16 w-16 items-center justify-center rounded-2xl border border-[#D4AF37]/70 bg-white/10 text-base font-black tracking-[0.12em] text-[#D4AF37] shadow-lg backdrop-blur-xl sm:h-20 sm:w-20 sm:text-lg"
+          >
+            TWCC
+          </a>
+
+          <a
+            href="/"
+            className="rounded-full border border-white/25 bg-white/10 px-6 py-3 text-sm font-semibold text-white backdrop-blur-xl transition hover:border-[#D4AF37] hover:bg-[#D4AF37] hover:text-[#101B3D]"
+          >
+            Home
+          </a>
+        </div>
+      </header>
+
+      <section className="relative z-10 flex min-h-screen items-center justify-center px-4 py-24">
+        <div className="w-full max-w-md rounded-[2rem] border border-white/15 bg-white/10 p-8 shadow-2xl backdrop-blur-xl">
           <div className="text-center">
             <p className="text-sm font-semibold uppercase tracking-[0.3em] text-[#D4AF37]">
-              TWCC
+              Member Access
             </p>
 
             <h1 className="mt-4 text-3xl font-bold text-white">
               Welcome Back
             </h1>
 
-            <p className="mt-2 text-sm leading-6 text-white/70">
+            <p className="mt-3 text-sm leading-6 text-white/70">
               Login to The World Class Choir portal.
             </p>
           </div>
@@ -109,14 +127,9 @@ export default function LoginPage() {
             </button>
           </form>
 
-          <div className="mt-6 flex justify-center">
-            <a
-              href="/"
-              className="text-sm font-semibold text-white/80 transition hover:text-[#D4AF37]"
-            >
-              Back to Home
-            </a>
-          </div>
+          <p className="mt-6 text-center text-xs leading-5 text-white/55">
+            Called to worship, chosen to serve.
+          </p>
         </div>
       </section>
     </main>
