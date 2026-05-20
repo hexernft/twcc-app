@@ -51,14 +51,14 @@ export default function LoginPage() {
         <div className="mx-auto flex max-w-6xl items-center justify-between">
           <a
             href="/"
-            className="flex h-16 w-16 items-center justify-center rounded-2xl border border-[#501220]/80 bg-white/10 text-base font-black tracking-[0.12em] text-white shadow-lg backdrop-blur-xl sm:h-20 sm:w-20 sm:text-lg"
+            className="flex h-16 w-16 items-center justify-center rounded-2xl border border-[#F7E7CE]/70 bg-white/10 text-base font-black tracking-[0.12em] text-[#F7E7CE] shadow-lg backdrop-blur-xl sm:h-20 sm:w-20 sm:text-lg"
           >
             TWCC
           </a>
 
           <a
             href="/"
-            className="rounded-full border border-white/25 bg-white/10 px-6 py-3 text-sm font-semibold text-white backdrop-blur-xl transition hover:border-[#501220] hover:bg-[#501220] hover:text-white"
+            className="rounded-full border border-[#F7E7CE]/50 bg-white/10 px-6 py-3 text-sm font-semibold text-[#F7E7CE] backdrop-blur-xl transition hover:bg-[#F7E7CE] hover:text-[#101B3D]"
           >
             Home
           </a>
@@ -68,7 +68,7 @@ export default function LoginPage() {
       <section className="relative z-10 flex min-h-screen items-center justify-center px-4 py-24">
         <div className="w-full max-w-md rounded-[2rem] border border-white/15 bg-white/10 p-8 shadow-2xl backdrop-blur-xl">
           <div className="text-center">
-            <p className="text-sm font-semibold uppercase tracking-[0.3em] text-[#F4D7DD]">
+            <p className="text-sm font-semibold uppercase tracking-[0.3em] text-[#F7E7CE]">
               Member Access
             </p>
 
@@ -93,7 +93,7 @@ export default function LoginPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="you@example.com"
-                className="mt-2 w-full rounded-2xl border border-white/20 bg-white/90 px-4 py-3 text-sm text-[#101B3D] outline-none placeholder:text-gray-400 focus:border-[#501220]"
+                className="mt-2 w-full rounded-2xl border border-white/20 bg-white/90 px-4 py-3 text-sm text-[#101B3D] outline-none placeholder:text-gray-400 focus:border-[#F7E7CE]"
               />
             </div>
 
@@ -108,7 +108,7 @@ export default function LoginPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Enter your password"
-                className="mt-2 w-full rounded-2xl border border-white/20 bg-white/90 px-4 py-3 text-sm text-[#101B3D] outline-none placeholder:text-gray-400 focus:border-[#501220]"
+                className="mt-2 w-full rounded-2xl border border-white/20 bg-white/90 px-4 py-3 text-sm text-[#101B3D] outline-none placeholder:text-gray-400 focus:border-[#F7E7CE]"
               />
             </div>
 
@@ -121,7 +121,7 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full rounded-full bg-[#501220] px-6 py-3 text-sm font-bold text-white transition hover:bg-[#6B1B2B] disabled:cursor-not-allowed disabled:opacity-60"
+              className="w-full rounded-full bg-[#F7E7CE] px-6 py-3 text-sm font-bold text-[#101B3D] transition hover:bg-white disabled:cursor-not-allowed disabled:opacity-60"
             >
               {loading ? "Logging in..." : "Login"}
             </button>
