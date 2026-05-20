@@ -1,9 +1,3 @@
-"use client";
-
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-import { supabase } from "@/lib/supabase";
-
 const summaryCards = [
   { label: "Total Members", value: "86" },
   { label: "Active Members", value: "78" },
@@ -16,94 +10,39 @@ const summaryCards = [
 const quickActions = [
   {
     label: "Add Member",
+    description: "Register a new choir member",
     href: "/admin/members/add",
   },
   {
     label: "Post Announcement",
+    description: "Share updates with the choir",
     href: "/admin/announcements/create",
   },
   {
     label: "Create Rehearsal",
+    description: "Schedule rehearsal details",
     href: "/admin/rehearsals/create",
   },
   {
     label: "Mark Attendance",
+    description: "Record attendance quickly",
     href: "/admin/attendance",
   },
   {
     label: "Upload Photos",
+    description: "Manage choir gallery albums",
     href: "/admin/gallery",
   },
   {
     label: "Add Loveworld Song",
+    description: "Upload lyrics and song links",
     href: "/admin/songs",
   },
 ];
 
 export default function AdminDashboardPage() {
-  const router = useRouter();
-  const [checkingAuth, setCheckingAuth] = useState(true);
-  const [notice, setNotice] = useState("");
-
-  async function checkAdminAccess() {
-    const { data: userData } = await supabase.auth.getUser();
-
-    if (!userData.user) {
-      router.push("/login");
-      return;
-    }
-
-    const { data: profile, error } = await supabase
-      .from("profiles")
-      .select("role")
-      .eq("id", userData.user.id)
-      .single();
-
-    if (error || !profile) {
-      setNotice("Profile not found. Please contact an admin.");
-      setCheckingAuth(false);
-      return;
-    }
-
-    if (!["super_admin", "admin"].includes(profile.role)) {
-      router.push("/dashboard");
-      return;
-    }
-
-    setCheckingAuth(false);
-  }
-
-  async function handleLogout() {
-    await supabase.auth.signOut();
-    router.push("/login");
-  }
-
-  useEffect(() => {
-    checkAdminAccess();
-  }, []);
-
-  if (checkingAuth) {
-    return (
-      <main className="flex min-h-screen items-center justify-center bg-[#F8F5EE] px-4">
-        <div className="rounded-3xl bg-white px-6 py-4 text-sm font-semibold text-gray-500 shadow-sm">
-          Checking admin access...
-        </div>
-      </main>
-    );
-  }
-
-  if (notice) {
-    return (
-      <main className="flex min-h-screen items-center justify-center bg-[#F8F5EE] px-4">
-        <div className="rounded-3xl bg-white p-6 text-sm font-semibold text-[#101B3D] shadow-sm">
-          {notice}
-        </div>
-      </main>
-    );
-  }
-
   return (
-    <main className="min-h-screen bg-[#F8F5EE] px-4 py-6 text-[#1F2937]">
+    <div className="min-h-screen px-4 py-6 text-[#1F2937]">
       <div className="mx-auto max-w-7xl">
         <header className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
@@ -111,29 +50,30 @@ export default function AdminDashboardPage() {
               TWCC Admin
             </p>
 
-            <h1 className="mt-2 text-3xl font-bold text-[#101B3D]">
+            <h1 className="mt-2 text-3xl font-bold text-white">
               Management Center
             </h1>
 
-            <p className="mt-1 text-sm text-gray-500">
-              Manage members, rehearsals, attendance, welfare, gallery, and songs.
+            <p className="mt-1 max-w-2xl text-sm leading-6 text-white/75">
+              Manage members, rehearsals, attendance, welfare, gallery, songs,
+              and choir communication from one secure place.
             </p>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex flex-wrap gap-3">
             <a
               href="/dashboard"
-              className="rounded-full border border-[#101B3D] px-5 py-3 text-sm font-semibold text-[#101B3D]"
+              className="rounded-full border border-white/30 bg-white/15 px-5 py-3 text-sm font-semibold text-white shadow-xl backdrop-blur-md transition hover:bg-white hover:text-[#101B3D]"
             >
               Member View
             </a>
 
-            <button
-              onClick={handleLogout}
-              className="rounded-full bg-[#101B3D] px-5 py-3 text-sm font-semibold text-white"
+            <a
+              href="/admin/members/add"
+              className="rounded-full bg-[#D4AF37] px-5 py-3 text-sm font-bold text-[#101B3D] shadow-xl transition hover:bg-white"
             >
-              Logout
-            </button>
+              Add Member
+            </a>
           </div>
         </header>
 
@@ -141,7 +81,7 @@ export default function AdminDashboardPage() {
           {summaryCards.map((card) => (
             <div
               key={card.label}
-              className="rounded-3xl border border-black/5 bg-white p-5 shadow-sm"
+              className="rounded-3xl border border-white/20 bg-white/95 p-5 shadow-2xl backdrop-blur-md"
             >
               <p className="text-sm text-gray-500">{card.label}</p>
               <p className="mt-3 text-3xl font-bold text-[#101B3D]">
@@ -153,7 +93,7 @@ export default function AdminDashboardPage() {
 
         <section className="mt-6 grid gap-6 lg:grid-cols-3">
           <div className="space-y-6 lg:col-span-2">
-            <div className="rounded-3xl border border-black/5 bg-white p-6 shadow-sm">
+            <div className="rounded-3xl border border-white/20 bg-white/95 p-6 shadow-2xl backdrop-blur-md">
               <div>
                 <p className="text-sm font-semibold text-[#D4AF37]">
                   Quick Actions
@@ -162,6 +102,10 @@ export default function AdminDashboardPage() {
                 <h2 className="mt-2 text-xl font-bold text-[#101B3D]">
                   What do you want to manage?
                 </h2>
+
+                <p className="mt-1 text-sm text-gray-500">
+                  Jump straight into the most important admin tasks.
+                </p>
               </div>
 
               <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
@@ -169,65 +113,67 @@ export default function AdminDashboardPage() {
                   <a
                     key={action.label}
                     href={action.href}
-                    className="rounded-2xl bg-[#F8F5EE] px-4 py-4 text-left text-sm font-semibold text-[#101B3D] transition hover:bg-[#101B3D] hover:text-white"
+                    className="group rounded-2xl bg-[#F8F5EE] px-4 py-4 text-left transition hover:bg-[#101B3D]"
                   >
-                    {action.label}
+                    <p className="text-sm font-bold text-[#101B3D] group-hover:text-white">
+                      {action.label}
+                    </p>
+
+                    <p className="mt-1 text-xs leading-5 text-gray-500 group-hover:text-white/70">
+                      {action.description}
+                    </p>
                   </a>
                 ))}
               </div>
             </div>
 
-            <div className="rounded-3xl border border-black/5 bg-white p-6 shadow-sm">
-              <p className="text-sm font-semibold text-[#D4AF37]">
-                Attendance Overview
-              </p>
+            <div className="rounded-3xl bg-[#101B3D]/95 p-6 text-white shadow-2xl backdrop-blur-md">
+              <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+                <div>
+                  <p className="text-sm font-semibold text-[#D4AF37]">
+                    Attendance Overview
+                  </p>
 
-              <div className="mt-5 rounded-3xl bg-[#101B3D] p-6 text-white">
-                <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-                  <div>
-                    <p className="text-sm text-white/70">Last Rehearsal</p>
+                  <h2 className="mt-2 text-3xl font-bold">82% Attendance</h2>
 
-                    <h2 className="mt-2 text-3xl font-bold">82% Attendance</h2>
-
-                    <p className="mt-2 text-sm text-white/70">
-                      Present and late members counted as attended.
-                    </p>
-                  </div>
-
-                  <a
-                    href="/admin/attendance"
-                    className="rounded-full bg-white px-5 py-3 text-sm font-semibold text-[#101B3D]"
-                  >
-                    View Report
-                  </a>
+                  <p className="mt-2 text-sm text-white/70">
+                    Last rehearsal attendance summary.
+                  </p>
                 </div>
 
-                <div className="mt-6 grid gap-3 sm:grid-cols-4">
-                  <div className="rounded-2xl bg-white/10 p-4">
-                    <p className="text-xs text-white/60">Present</p>
-                    <p className="mt-1 text-xl font-bold">42</p>
-                  </div>
+                <a
+                  href="/admin/attendance/report"
+                  className="rounded-full bg-white px-5 py-3 text-sm font-semibold text-[#101B3D]"
+                >
+                  View Report
+                </a>
+              </div>
 
-                  <div className="rounded-2xl bg-white/10 p-4">
-                    <p className="text-xs text-white/60">Absent</p>
-                    <p className="mt-1 text-xl font-bold">8</p>
-                  </div>
+              <div className="mt-6 grid gap-3 sm:grid-cols-4">
+                <div className="rounded-2xl bg-white/10 p-4">
+                  <p className="text-xs text-white/60">Present</p>
+                  <p className="mt-1 text-xl font-bold">42</p>
+                </div>
 
-                  <div className="rounded-2xl bg-white/10 p-4">
-                    <p className="text-xs text-white/60">Late</p>
-                    <p className="mt-1 text-xl font-bold">5</p>
-                  </div>
+                <div className="rounded-2xl bg-white/10 p-4">
+                  <p className="text-xs text-white/60">Absent</p>
+                  <p className="mt-1 text-xl font-bold">8</p>
+                </div>
 
-                  <div className="rounded-2xl bg-white/10 p-4">
-                    <p className="text-xs text-white/60">Excused</p>
-                    <p className="mt-1 text-xl font-bold">3</p>
-                  </div>
+                <div className="rounded-2xl bg-white/10 p-4">
+                  <p className="text-xs text-white/60">Late</p>
+                  <p className="mt-1 text-xl font-bold">5</p>
+                </div>
+
+                <div className="rounded-2xl bg-white/10 p-4">
+                  <p className="text-xs text-white/60">Excused</p>
+                  <p className="mt-1 text-xl font-bold">3</p>
                 </div>
               </div>
             </div>
 
-            <div className="rounded-3xl border border-black/5 bg-white p-6 shadow-sm">
-              <div className="flex items-center justify-between">
+            <div className="rounded-3xl border border-white/20 bg-white/95 p-6 shadow-2xl backdrop-blur-md">
+              <div className="flex items-center justify-between gap-4">
                 <div>
                   <p className="text-sm font-semibold text-[#D4AF37]">
                     Upcoming Rehearsals
@@ -294,7 +240,7 @@ export default function AdminDashboardPage() {
           </div>
 
           <aside className="space-y-6">
-            <div className="rounded-3xl border border-black/5 bg-white p-6 shadow-sm">
+            <div className="rounded-3xl border border-white/20 bg-white/95 p-6 shadow-2xl backdrop-blur-md">
               <p className="text-sm font-semibold text-[#D4AF37]">
                 Welfare Overview
               </p>
@@ -328,7 +274,7 @@ export default function AdminDashboardPage() {
               </a>
             </div>
 
-            <div className="rounded-3xl border border-black/5 bg-white p-6 shadow-sm">
+            <div className="rounded-3xl border border-white/20 bg-white/95 p-6 shadow-2xl backdrop-blur-md">
               <p className="text-sm font-semibold text-[#D4AF37]">
                 Latest Announcements
               </p>
@@ -375,7 +321,7 @@ export default function AdminDashboardPage() {
               </a>
             </div>
 
-            <div className="rounded-3xl border border-black/5 bg-white p-6 shadow-sm">
+            <div className="rounded-3xl border border-white/20 bg-white/95 p-6 shadow-2xl backdrop-blur-md">
               <p className="text-sm font-semibold text-[#D4AF37]">
                 Media & Songs
               </p>
@@ -423,6 +369,6 @@ export default function AdminDashboardPage() {
           </aside>
         </section>
       </div>
-    </main>
+    </div>
   );
 }
