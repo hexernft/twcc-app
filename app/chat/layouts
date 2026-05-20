@@ -1,0 +1,13 @@
+import PageBackground from "@/components/PageBackground";
+
+export default function ChatLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <PageBackground image="chat" blur="soft">
+      {children}
+    </PageBackground>
+  );
+}
