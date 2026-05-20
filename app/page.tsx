@@ -15,13 +15,13 @@ export default function HomePage() {
 
       <header className="absolute left-0 right-0 top-0 z-20 px-4 py-5">
         <div className="mx-auto flex max-w-6xl items-center justify-between">
-          <div className="flex h-16 w-16 items-center justify-center rounded-2xl border border-[#D4AF37]/70 bg-white/10 text-base font-black tracking-[0.12em] text-[#D4AF37] shadow-lg backdrop-blur-xl sm:h-20 sm:w-20 sm:text-lg">
+          <div className="flex h-16 w-16 items-center justify-center rounded-2xl border border-[#501220]/80 bg-white/10 text-base font-black tracking-[0.12em] text-white shadow-lg backdrop-blur-xl sm:h-20 sm:w-20 sm:text-lg">
             TWCC
           </div>
 
           <a
             href="/login"
-            className="rounded-full border border-white/25 bg-white/10 px-6 py-3 text-sm font-semibold text-white backdrop-blur-xl transition hover:border-[#D4AF37] hover:bg-[#D4AF37] hover:text-[#101B3D]"
+            className="rounded-full border border-white/25 bg-white/10 px-6 py-3 text-sm font-semibold text-white backdrop-blur-xl transition hover:border-[#501220] hover:bg-[#501220] hover:text-white"
           >
             Login
           </a>
@@ -42,7 +42,7 @@ export default function HomePage() {
 
           <div className="mx-auto mt-6 flex max-w-3xl flex-col items-center justify-between gap-4 rounded-3xl border border-white/10 bg-white/10 px-6 py-5 text-center backdrop-blur-xl sm:flex-row sm:text-left">
             <div>
-              <p className="text-sm font-semibold text-[#D4AF37]">
+              <p className="text-sm font-semibold text-[#F4D7DD]">
                 Follow us on Instagram
               </p>
 
@@ -56,7 +56,7 @@ export default function HomePage() {
               href="https://www.instagram.com/twcchoir/"
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-2 rounded-full border border-[#D4AF37] px-6 py-3 text-sm font-bold text-[#D4AF37] transition hover:bg-[#D4AF37] hover:text-[#101B3D]"
+              className="inline-flex items-center gap-2 rounded-full border border-[#501220] bg-[#501220]/20 px-6 py-3 text-sm font-bold text-white transition hover:bg-[#501220] hover:text-white"
             >
               <span className="text-lg">◎</span>
               <span>@twcchoir</span>
