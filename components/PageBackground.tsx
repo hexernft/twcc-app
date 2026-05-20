@@ -11,7 +11,14 @@ type PageBackgroundProps = {
     | "members";
   children: React.ReactNode;
   blur?: "soft" | "medium" | "strong";
-  overlayColor?: "navy" | "black" | "gold" | "purple" | "green" | "brown";
+  overlayColor?:
+    | "navy"
+    | "black"
+    | "maroon"
+    | "gold"
+    | "purple"
+    | "green"
+    | "brown";
   overlayStrength?: "soft" | "medium" | "strong";
 };
 
@@ -36,6 +43,7 @@ const blurLevels = {
 const overlayColors = {
   navy: "16, 27, 61",
   black: "0, 0, 0",
+  maroon: "80, 18, 32",
   gold: "70, 54, 10",
   purple: "37, 24, 68",
   green: "12, 50, 38",
@@ -43,9 +51,9 @@ const overlayColors = {
 };
 
 const overlayOpacity = {
-  soft: 0.55,
-  medium: 0.68,
-  strong: 0.78,
+  soft: 0.6,
+  medium: 0.75,
+  strong: 0.86,
 };
 
 export default function PageBackground({
@@ -75,7 +83,7 @@ export default function PageBackground({
         }}
       />
 
-      <div className="fixed inset-0 bg-gradient-to-b from-black/15 via-transparent to-black/30" />
+      <div className="fixed inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/40" />
 
       <div className="relative z-10 min-h-screen">{children}</div>
     </main>
