@@ -15,17 +15,17 @@ const quickActions = [
   },
   {
     label: "Post Announcement",
-    description: "Share updates with the choir",
+    description: "Share important choir updates",
     href: "/admin/announcements/create",
   },
   {
     label: "Create Rehearsal",
-    description: "Schedule rehearsal details",
+    description: "Schedule rehearsal time and venue",
     href: "/admin/rehearsals/create",
   },
   {
     label: "Mark Attendance",
-    description: "Record attendance quickly",
+    description: "Record attendance for members",
     href: "/admin/attendance",
   },
   {
@@ -34,9 +34,47 @@ const quickActions = [
     href: "/admin/gallery",
   },
   {
-    label: "Add Loveworld Song",
+    label: "Add Song",
     description: "Upload lyrics and song links",
+    href: "/admin/songs/create",
+  },
+];
+
+const managementSections = [
+  {
+    title: "Members",
+    description: "View, add, and update choir member records.",
+    href: "/admin/members",
+  },
+  {
+    title: "Announcements",
+    description: "Post updates, reminders, dress codes, and notices.",
+    href: "/admin/announcements",
+  },
+  {
+    title: "Rehearsals",
+    description: "Create and manage rehearsal schedules.",
+    href: "/admin/rehearsals",
+  },
+  {
+    title: "Attendance",
+    description: "Mark attendance and view reports.",
+    href: "/admin/attendance",
+  },
+  {
+    title: "Welfare",
+    description: "Track care, follow-ups, sickness, and member welfare.",
+    href: "/admin/welfare",
+  },
+  {
+    title: "Songs",
+    description: "Manage Loveworld songs, lyrics, and practice notes.",
     href: "/admin/songs",
+  },
+  {
+    title: "Gallery",
+    description: "Create albums and upload choir photos.",
+    href: "/admin/gallery",
   },
 ];
 
@@ -46,16 +84,16 @@ export default function AdminDashboardPage() {
       <div className="mx-auto max-w-7xl">
         <header className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#D4AF37]">
+            <p className="text-sm font-bold uppercase tracking-[0.24em] text-[#D4AF37]">
               TWCC Admin
             </p>
 
-            <h1 className="mt-2 text-3xl font-bold text-white">
+            <h1 className="mt-2 text-3xl font-bold text-white drop-shadow-sm">
               Management Center
             </h1>
 
-            <p className="mt-1 max-w-2xl text-sm leading-6 text-white/75">
-              Manage members, rehearsals, attendance, welfare, gallery, songs,
+            <p className="mt-1 max-w-2xl text-sm font-medium leading-6 text-white/75">
+              Manage members, rehearsals, attendance, welfare, songs, gallery,
               and choir communication from one secure place.
             </p>
           </div>
@@ -63,7 +101,7 @@ export default function AdminDashboardPage() {
           <div className="flex flex-wrap gap-3">
             <a
               href="/dashboard"
-              className="rounded-full border border-white/30 bg-white/15 px-5 py-3 text-sm font-semibold text-white shadow-xl backdrop-blur-md transition hover:bg-white hover:text-[#101B3D]"
+              className="rounded-full border border-[#D4AF37]/50 bg-white/10 px-5 py-3 text-sm font-semibold text-white shadow-xl backdrop-blur-md transition hover:bg-white hover:text-[#101B3D]"
             >
               Member View
             </a>
@@ -84,6 +122,7 @@ export default function AdminDashboardPage() {
               className="rounded-3xl border border-white/20 bg-white/95 p-5 shadow-2xl backdrop-blur-md"
             >
               <p className="text-sm text-gray-500">{card.label}</p>
+
               <p className="mt-3 text-3xl font-bold text-[#101B3D]">
                 {card.value}
               </p>
@@ -134,7 +173,9 @@ export default function AdminDashboardPage() {
                     Attendance Overview
                   </p>
 
-                  <h2 className="mt-2 text-3xl font-bold">82% Attendance</h2>
+                  <h2 className="mt-2 text-3xl font-bold">
+                    82% Attendance
+                  </h2>
 
                   <p className="mt-2 text-sm text-white/70">
                     Last rehearsal attendance summary.
@@ -173,69 +214,42 @@ export default function AdminDashboardPage() {
             </div>
 
             <div className="rounded-3xl border border-white/20 bg-white/95 p-6 shadow-2xl backdrop-blur-md">
-              <div className="flex items-center justify-between gap-4">
+              <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                 <div>
                   <p className="text-sm font-semibold text-[#D4AF37]">
-                    Upcoming Rehearsals
+                    Management Sections
                   </p>
 
                   <h2 className="mt-2 text-xl font-bold text-[#101B3D]">
-                    This Week
+                    Admin Tools
                   </h2>
                 </div>
 
                 <a
-                  href="/admin/rehearsals/create"
-                  className="rounded-full bg-[#101B3D] px-5 py-3 text-sm font-semibold text-white"
+                  href="/admin/members"
+                  className="w-fit rounded-full bg-[#101B3D] px-5 py-3 text-sm font-semibold text-white"
                 >
-                  Create
+                  View Members
                 </a>
               </div>
 
-              <div className="mt-5 space-y-4">
-                <div className="rounded-2xl bg-[#F8F5EE] p-4">
-                  <div className="flex justify-between gap-4">
-                    <div>
-                      <h3 className="font-bold text-[#101B3D]">
-                        Midweek Choir Rehearsal
-                      </h3>
+              <div className="mt-6 grid gap-3 sm:grid-cols-2">
+                {managementSections.map((section) => (
+                  <a
+                    key={section.title}
+                    href={section.href}
+                    className="rounded-2xl border border-black/5 bg-[#F8F5EE] p-4 transition hover:bg-white hover:shadow-md"
+                  >
+                    <h3 className="font-bold text-[#101B3D]">
+                      {section.title}
+                    </h3>
 
-                      <p className="mt-1 text-sm text-gray-500">
-                        Wednesday, May 20 · 6:00 PM · Main Auditorium
-                      </p>
-                    </div>
-
-                    <span className="h-fit rounded-full bg-green-100 px-3 py-1 text-xs font-bold text-green-700">
-                      Scheduled
-                    </span>
-                  </div>
-                </div>
-
-                <div className="rounded-2xl bg-[#F8F5EE] p-4">
-                  <div className="flex justify-between gap-4">
-                    <div>
-                      <h3 className="font-bold text-[#101B3D]">
-                        Sunday Ministration Prep
-                      </h3>
-
-                      <p className="mt-1 text-sm text-gray-500">
-                        Saturday, May 23 · 4:00 PM · Choir Room
-                      </p>
-                    </div>
-
-                    <span className="h-fit rounded-full bg-green-100 px-3 py-1 text-xs font-bold text-green-700">
-                      Scheduled
-                    </span>
-                  </div>
-                </div>
+                    <p className="mt-1 text-sm leading-6 text-gray-500">
+                      {section.description}
+                    </p>
+                  </a>
+                ))}
               </div>
-
-              <a
-                href="/admin/rehearsals"
-                className="mt-5 inline-block rounded-full border border-[#101B3D] px-5 py-3 text-sm font-semibold text-[#101B3D]"
-              >
-                Manage Rehearsals
-              </a>
             </div>
           </div>
 
