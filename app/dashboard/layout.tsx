@@ -9,7 +9,7 @@ export default function DashboardLayout({
     <PageBackground
       image="dashboard"
       blur="medium"
-      overlayColor="maroon"
+      overlayColor="purple"
       overlayStrength="medium"
     >
       {children}

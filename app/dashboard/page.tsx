@@ -47,23 +47,23 @@ export default function DashboardPage() {
               TWCC
             </p>
 
-            <h1 className="mt-2 text-3xl font-bold text-[#FFF7E6] drop-shadow-sm">
+            <h1 className="mt-2 text-3xl font-bold text-white drop-shadow-sm">
               Good evening 👋
             </h1>
 
-            <p className="mt-1 text-sm font-medium text-[#F7D9B2]">
+            <p className="mt-1 text-sm font-medium text-white/75">
               Welcome to The World Class Choir Portal
             </p>
           </div>
 
           <div className="flex items-center gap-3">
-            <button className="rounded-full border border-[#D4AF37]/40 bg-[#FFF7E6]/95 px-4 py-2 text-sm font-semibold text-[#501220] shadow-xl backdrop-blur-md">
+            <button className="rounded-full border border-[#D4AF37]/40 bg-white/95 px-4 py-2 text-sm font-semibold text-[#101B3D] shadow-xl backdrop-blur-md">
               🔔
             </button>
 
             <button
               onClick={handleLogout}
-              className="rounded-full border border-[#D4AF37]/60 bg-[#D4AF37]/15 px-4 py-2 text-sm font-semibold text-[#FFF7E6] shadow-xl backdrop-blur-md transition hover:bg-[#D4AF37] hover:text-[#501220]"
+              className="rounded-full border border-[#D4AF37]/60 bg-white/10 px-4 py-2 text-sm font-semibold text-white shadow-xl backdrop-blur-md transition hover:bg-[#D4AF37] hover:text-[#101B3D]"
             >
               Logout
             </button>
@@ -79,11 +79,11 @@ export default function DashboardPage() {
                     Next Rehearsal
                   </p>
 
-                  <h2 className="mt-3 text-2xl font-bold text-[#FFF7E6]">
+                  <h2 className="mt-3 text-2xl font-bold text-white">
                     Midweek Choir Rehearsal
                   </h2>
 
-                  <p className="mt-2 text-sm text-[#F7D9B2]">
+                  <p className="mt-2 text-sm text-white/70">
                     Wednesday, May 20, 2026
                   </p>
                 </div>
@@ -112,7 +112,7 @@ export default function DashboardPage() {
 
               <a
                 href="/rehearsals"
-                className="mt-6 inline-block rounded-full bg-[#FFF7E6] px-5 py-3 text-sm font-semibold text-[#101B3D]"
+                className="mt-6 inline-block rounded-full bg-white px-5 py-3 text-sm font-semibold text-[#101B3D]"
               >
                 View Rehearsal
               </a>
