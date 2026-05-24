@@ -127,9 +127,18 @@ export default function LoginPage() {
             </button>
           </form>
 
-          <p className="mt-6 text-center text-xs leading-5 text-white/55">
-            Called to worship, chosen to serve.
-          </p>
+          <div className="mt-6 text-center">
+            <p className="text-xs leading-5 text-white/55">
+              Called to Worship, Chosen to Serve.
+            </p>
+
+            <a
+              href="/signup"
+              className="mt-3 inline-block text-sm font-semibold text-[#F7E7CE] transition hover:text-white"
+            >
+              New member? Create an account
+            </a>
+          </div>
         </div>
       </section>
     </main>
