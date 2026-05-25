@@ -16,6 +16,8 @@ export default function SignupPage() {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
 
+  const [showPassword, setShowPassword] = useState(false);
+
   const [formData, setFormData] = useState({
     full_name: "",
     email: "",
@@ -77,10 +79,7 @@ export default function SignupPage() {
       return;
     }
 
-    if (
-      formData.wedding_anniversary &&
-      formData.wedding_anniversary > today
-    ) {
+    if (formData.wedding_anniversary && formData.wedding_anniversary > today) {
       setLoading(false);
       setMessage("Wedding anniversary cannot be in the future.");
       return;
@@ -111,7 +110,7 @@ export default function SignupPage() {
         id: user.id,
         full_name: formData.full_name,
         email: cleanEmail,
-        role: "member",
+        role: "pending_member",
       });
 
       if (profileError) {
@@ -242,16 +241,26 @@ export default function SignupPage() {
                   Password
                 </label>
 
-                <input
-                  name="password"
-                  type="password"
-                  required
-                  minLength={6}
-                  value={formData.password}
-                  onChange={updateField}
-                  placeholder="Create password"
-                  className="mt-2 w-full rounded-2xl border border-white/20 bg-white/90 px-4 py-3 text-sm text-[#101B3D] outline-none placeholder:text-gray-400 focus:border-[#F7E7CE]"
-                />
+                <div className="mt-2 flex overflow-hidden rounded-2xl border border-white/20 bg-white/90 focus-within:border-[#F7E7CE]">
+                  <input
+                    name="password"
+                    type={showPassword ? "text" : "password"}
+                    required
+                    minLength={6}
+                    value={formData.password}
+                    onChange={updateField}
+                    placeholder="Create password"
+                    className="w-full bg-transparent px-4 py-3 text-sm text-[#101B3D] outline-none placeholder:text-gray-400"
+                  />
+
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword((prev) => !prev)}
+                    className="px-4 text-xs font-bold text-[#101B3D] transition hover:bg-[#F7E7CE]"
+                  >
+                    {showPassword ? "Hide" : "Show"}
+                  </button>
+                </div>
               </div>
 
               <div>

@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import PWARegister from "@/components/PWARegister";
+import MobileBottomNav from "@/components/MobileBottomNav";
 
 export const metadata: Metadata = {
   title: "TWCC",
@@ -34,6 +35,7 @@ export default function RootLayout({
       <body>
         <PWARegister />
         {children}
+        <MobileBottomNav />
       </body>
     </html>
   );
