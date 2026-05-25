@@ -7,25 +7,25 @@ export const metadata: Metadata = {
   description: "The World Class Choir Portal",
   manifest: "/manifest.json",
   icons: {
-    icon: "/twcc-icon.svg",
-    apple: "/twcc-icon.svg"
+    icon: "/icon-192.png",
+    apple: "/icon-192.png",
   },
   appleWebApp: {
     capable: true,
     title: "TWCC",
-    statusBarStyle: "black-translucent"
-  }
+    statusBarStyle: "black-translucent",
+  },
 };
 
 export const viewport: Viewport = {
   themeColor: "#101B3D",
   width: "device-width",
   initialScale: 1,
-  maximumScale: 1
+  maximumScale: 1,
 };
 
 export default function RootLayout({
-  children
+  children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
