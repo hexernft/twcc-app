@@ -1,124 +1,90 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase";
 
 type ChatChannel = {
   id: string;
   name: string;
   description: string | null;
-  channel_type: string;
-  section: string | null;
   created_at: string;
 };
 
 export default function ChatPage() {
-  const [channel, setChannel] = useState<ChatChannel | null>(null);
+  const router = useRouter();
+
   const [loading, setLoading] = useState(true);
   const [message, setMessage] = useState("");
 
-  async function fetchGeneralChat() {
-    setLoading(true);
-    setMessage("");
+  useEffect(() => {
+    async function openDefaultChat() {
+      setLoading(true);
+      setMessage("");
 
-    const { data, error } = await supabase
-      .from("chat_channels")
-      .select("id, name, description, channel_type, section, created_at")
-      .eq("channel_type", "general")
-      .limit(1)
-      .single();
+      const { data: userData } = await supabase.auth.getUser();
 
-    if (error) {
-      setMessage(error.message);
-      setLoading(false);
-      return;
+      if (!userData.user) {
+        router.replace("/login");
+        return;
+      }
+
+      const { data: channels, error } = await supabase
+        .from("chat_channels")
+        .select("id, name, description, created_at")
+        .order("created_at", { ascending: true });
+
+      if (error) {
+        setMessage(error.message);
+        setLoading(false);
+        return;
+      }
+
+      const allChannels = (channels || []) as ChatChannel[];
+
+      if (allChannels.length === 0) {
+        setMessage("No chat channel has been created yet.");
+        setLoading(false);
+        return;
+      }
+
+      const generalChannel =
+        allChannels.find((channel) =>
+          channel.name.toLowerCase().includes("general")
+        ) || allChannels[0];
+
+      router.replace(`/chat/${generalChannel.id}`);
     }
 
-    setChannel(data);
-    setLoading(false);
-  }
-
-  useEffect(() => {
-    fetchGeneralChat();
-  }, []);
+    openDefaultChat();
+  }, [router]);
 
   return (
-    <main className="min-h-screen bg-[#F8F5EE] px-4 py-6 text-[#1F2937]">
-      <div className="mx-auto max-w-4xl">
-        <header className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-          <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[#D4AF37]">
-              TWCC
-            </p>
+    <div className="flex min-h-screen items-center justify-center px-4 py-10">
+      <div className="w-full max-w-md rounded-[2rem] border border-white/20 bg-white/95 p-8 text-center shadow-2xl backdrop-blur-md">
+        <p className="text-sm font-bold uppercase tracking-[0.24em] text-[#D4AF37]">
+          TWCC Chat
+        </p>
 
-            <h1 className="mt-2 text-3xl font-bold text-[#101B3D]">
-              General Choir Chat
-            </h1>
+        <h1 className="mt-4 text-2xl font-bold text-[#101B3D]">
+          {loading ? "Opening Chat..." : "Chat Not Available"}
+        </h1>
 
-            <p className="mt-1 text-sm text-gray-500">
-              One shared chat space for all TWCC members.
-            </p>
-          </div>
+        <p className="mx-auto mt-3 text-sm leading-6 text-gray-600">
+          {loading
+            ? "Please wait while we take you straight to the choir chat."
+            : message}
+        </p>
 
+        {!loading && (
           <a
             href="/dashboard"
-            className="w-fit rounded-full border border-[#101B3D] px-5 py-3 text-sm font-semibold text-[#101B3D]"
+            className="mt-6 inline-block rounded-full bg-[#101B3D] px-6 py-3 text-sm font-semibold text-white"
           >
             Back to Dashboard
           </a>
-        </header>
-
-        {message && (
-          <section className="mb-6 rounded-3xl border border-red-100 bg-red-50 p-5 text-sm font-semibold text-red-700">
-            {message}
-          </section>
-        )}
-
-        {loading && (
-          <section className="rounded-3xl border border-black/5 bg-white p-6 text-sm font-semibold text-gray-500 shadow-sm">
-            Loading general chat...
-          </section>
-        )}
-
-        {!loading && !channel && (
-          <section className="rounded-3xl border border-black/5 bg-white p-8 text-center shadow-sm">
-            <h2 className="text-xl font-bold text-[#101B3D]">
-              General chat not found
-            </h2>
-
-            <p className="mt-2 text-sm text-gray-500">
-              Please create the General Choir Chat channel in Supabase.
-            </p>
-          </section>
-        )}
-
-        {!loading && channel && (
-          <section className="rounded-3xl border border-black/5 bg-white p-6 shadow-sm">
-            <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
-              <div>
-                <span className="rounded-full bg-green-100 px-3 py-1 text-xs font-bold text-green-700">
-                  General
-                </span>
-
-                <h2 className="mt-4 text-2xl font-bold text-[#101B3D]">
-                  {channel.name}
-                </h2>
-
-                <p className="mt-2 text-sm leading-6 text-gray-600">
-                  {channel.description || "Main chat for all choir members."}
-                </p>
-              </div>
-
-              <a
-                href={`/chat/${channel.id}`}
-                className="rounded-full bg-[#101B3D] px-6 py-3 text-center text-sm font-semibold text-white"
-              >
-                Open General Chat
-              </a>
-            </div>
-          </section>
         )}
       </div>
-    </main>
+    </div>
   );
 }
