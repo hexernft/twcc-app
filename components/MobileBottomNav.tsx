@@ -244,9 +244,9 @@ export default function MobileBottomNav() {
         }
 
         if (difference > 0) {
-          setIsVisible(true);
-        } else {
           setIsVisible(false);
+        } else {
+          setIsVisible(true);
         }
 
         lastScrollYRef.current = currentScrollY;
@@ -291,7 +291,7 @@ export default function MobileBottomNav() {
               </div>
 
               <span
-                className={`truncate text-[11px] font-medium leading-none ${
+                className={`truncate text-[11px] font-medium leading-none tracking-wide ${
                   active ? "text-[#F7E7CE]" : "text-white/60"
                 }`}
               >
