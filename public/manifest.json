@@ -1,0 +1,20 @@
+{
+  "name": "The World Class Choir",
+  "short_name": "TWCC",
+  "description": "The World Class Choir Portal",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#101B3D",
+  "theme_color": "#101B3D",
+  "categories": ["music", "productivity", "community"],
+  "icons": [
+    {
+      "src": "/twcc-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

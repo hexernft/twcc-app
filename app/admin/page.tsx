@@ -3,11 +3,16 @@ const summaryCards = [
   { label: "Active Members", value: "78" },
   { label: "Attendance This Month", value: "82%" },
   { label: "Welfare Follow-ups", value: "5" },
-  { label: "Birthdays This Month", value: "9" },
+  { label: "Pending Signups", value: "0" },
   { label: "Gallery Albums", value: "24" },
 ];
 
 const quickActions = [
+  {
+    label: "Review Signups",
+    description: "View pending member registrations",
+    href: "/admin/signups",
+  },
   {
     label: "Add Member",
     description: "Register a new choir member",
@@ -29,11 +34,6 @@ const quickActions = [
     href: "/admin/attendance",
   },
   {
-    label: "Upload Photos",
-    description: "Manage choir gallery albums",
-    href: "/admin/gallery",
-  },
-  {
     label: "Add Song",
     description: "Upload lyrics and song links",
     href: "/admin/songs/create",
@@ -41,6 +41,11 @@ const quickActions = [
 ];
 
 const managementSections = [
+  {
+    title: "Member Signups",
+    description: "Review pending member registrations and submitted details.",
+    href: "/admin/signups",
+  },
   {
     title: "Members",
     description: "View, add, and update choir member records.",
@@ -93,8 +98,8 @@ export default function AdminDashboardPage() {
             </h1>
 
             <p className="mt-1 max-w-2xl text-sm font-medium leading-6 text-white/75">
-              Manage members, rehearsals, attendance, welfare, songs, gallery,
-              and choir communication from one secure place.
+              Manage member signups, members, rehearsals, attendance, welfare,
+              songs, gallery, and choir communication from one secure place.
             </p>
           </div>
 
@@ -107,10 +112,10 @@ export default function AdminDashboardPage() {
             </a>
 
             <a
-              href="/admin/members/add"
+              href="/admin/signups"
               className="rounded-full bg-[#D4AF37] px-5 py-3 text-sm font-bold text-[#101B3D] shadow-xl transition hover:bg-white"
             >
-              Add Member
+              Review Signups
             </a>
           </div>
         </header>
@@ -170,45 +175,41 @@ export default function AdminDashboardPage() {
               <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
                 <div>
                   <p className="text-sm font-semibold text-[#D4AF37]">
-                    Attendance Overview
+                    Member Onboarding
                   </p>
 
                   <h2 className="mt-2 text-3xl font-bold">
-                    82% Attendance
+                    Pending Member Signups
                   </h2>
 
                   <p className="mt-2 text-sm text-white/70">
-                    Last rehearsal attendance summary.
+                    Review newly submitted member information before giving full
+                    access.
                   </p>
                 </div>
 
                 <a
-                  href="/admin/attendance/report"
+                  href="/admin/signups"
                   className="rounded-full bg-white px-5 py-3 text-sm font-semibold text-[#101B3D]"
                 >
-                  View Report
+                  View Signups
                 </a>
               </div>
 
-              <div className="mt-6 grid gap-3 sm:grid-cols-4">
+              <div className="mt-6 grid gap-3 sm:grid-cols-3">
                 <div className="rounded-2xl bg-white/10 p-4">
-                  <p className="text-xs text-white/60">Present</p>
-                  <p className="mt-1 text-xl font-bold">42</p>
+                  <p className="text-xs text-white/60">Pending</p>
+                  <p className="mt-1 text-xl font-bold">0</p>
                 </div>
 
                 <div className="rounded-2xl bg-white/10 p-4">
-                  <p className="text-xs text-white/60">Absent</p>
-                  <p className="mt-1 text-xl font-bold">8</p>
+                  <p className="text-xs text-white/60">Approved</p>
+                  <p className="mt-1 text-xl font-bold">0</p>
                 </div>
 
                 <div className="rounded-2xl bg-white/10 p-4">
-                  <p className="text-xs text-white/60">Late</p>
-                  <p className="mt-1 text-xl font-bold">5</p>
-                </div>
-
-                <div className="rounded-2xl bg-white/10 p-4">
-                  <p className="text-xs text-white/60">Excused</p>
-                  <p className="mt-1 text-xl font-bold">3</p>
+                  <p className="text-xs text-white/60">Rejected</p>
+                  <p className="mt-1 text-xl font-bold">0</p>
                 </div>
               </div>
             </div>
@@ -256,6 +257,40 @@ export default function AdminDashboardPage() {
           <aside className="space-y-6">
             <div className="rounded-3xl border border-white/20 bg-white/95 p-6 shadow-2xl backdrop-blur-md">
               <p className="text-sm font-semibold text-[#D4AF37]">
+                Attendance Overview
+              </p>
+
+              <h2 className="mt-2 text-xl font-bold text-[#101B3D]">
+                82% Attendance
+              </h2>
+
+              <div className="mt-5 space-y-3 text-sm">
+                <div className="flex justify-between rounded-2xl bg-[#F8F5EE] p-4">
+                  <span className="text-gray-600">Present</span>
+                  <span className="font-bold text-[#101B3D]">42</span>
+                </div>
+
+                <div className="flex justify-between rounded-2xl bg-[#F8F5EE] p-4">
+                  <span className="text-gray-600">Absent</span>
+                  <span className="font-bold text-[#101B3D]">8</span>
+                </div>
+
+                <div className="flex justify-between rounded-2xl bg-[#F8F5EE] p-4">
+                  <span className="text-gray-600">Late</span>
+                  <span className="font-bold text-[#101B3D]">5</span>
+                </div>
+              </div>
+
+              <a
+                href="/admin/attendance/report"
+                className="mt-5 block w-full rounded-full bg-[#D4AF37] px-5 py-3 text-center text-sm font-bold text-[#101B3D]"
+              >
+                View Attendance Report
+              </a>
+            </div>
+
+            <div className="rounded-3xl border border-white/20 bg-white/95 p-6 shadow-2xl backdrop-blur-md">
+              <p className="text-sm font-semibold text-[#D4AF37]">
                 Welfare Overview
               </p>
 
@@ -282,56 +317,9 @@ export default function AdminDashboardPage() {
 
               <a
                 href="/admin/welfare"
-                className="mt-5 block w-full rounded-full bg-[#D4AF37] px-5 py-3 text-center text-sm font-bold text-[#101B3D]"
-              >
-                View Welfare
-              </a>
-            </div>
-
-            <div className="rounded-3xl border border-white/20 bg-white/95 p-6 shadow-2xl backdrop-blur-md">
-              <p className="text-sm font-semibold text-[#D4AF37]">
-                Latest Announcements
-              </p>
-
-              <div className="mt-5 space-y-4">
-                <div className="rounded-2xl bg-[#F8F5EE] p-4">
-                  <div className="flex items-center justify-between gap-3">
-                    <h3 className="font-bold text-[#101B3D]">
-                      Dress Code for Sunday
-                    </h3>
-
-                    <span className="rounded-full bg-orange-100 px-3 py-1 text-xs font-bold text-orange-700">
-                      Important
-                    </span>
-                  </div>
-
-                  <p className="mt-2 text-sm text-gray-500">
-                    Posted May 19, 2026
-                  </p>
-                </div>
-
-                <div className="rounded-2xl bg-[#F8F5EE] p-4">
-                  <div className="flex items-center justify-between gap-3">
-                    <h3 className="font-bold text-[#101B3D]">
-                      Rehearsal Time Update
-                    </h3>
-
-                    <span className="rounded-full bg-red-100 px-3 py-1 text-xs font-bold text-red-700">
-                      Urgent
-                    </span>
-                  </div>
-
-                  <p className="mt-2 text-sm text-gray-500">
-                    Posted May 18, 2026
-                  </p>
-                </div>
-              </div>
-
-              <a
-                href="/admin/announcements"
                 className="mt-5 block w-full rounded-full border border-[#101B3D] px-5 py-3 text-center text-sm font-semibold text-[#101B3D]"
               >
-                Manage Announcements
+                View Welfare
               </a>
             </div>
 

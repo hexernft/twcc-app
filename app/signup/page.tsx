@@ -4,6 +4,10 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase";
 
+function isValidEmail(email: string) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email);
+}
+
 export default function SignupPage() {
   const router = useRouter();
 
@@ -32,6 +36,14 @@ export default function SignupPage() {
   ) {
     const { name, value } = e.target;
 
+    if (name === "phone") {
+      setFormData((prev) => ({
+        ...prev,
+        phone: value.replace(/\D/g, ""),
+      }));
+      return;
+    }
+
     setFormData((prev) => ({
       ...prev,
       [name]: value,
@@ -43,9 +55,23 @@ export default function SignupPage() {
     setLoading(true);
     setMessage("");
 
+    const cleanEmail = formData.email.trim().toLowerCase();
+
+    if (!isValidEmail(cleanEmail)) {
+      setLoading(false);
+      setMessage("Please enter a valid email address.");
+      return;
+    }
+
+    if (formData.phone && formData.phone.length < 7) {
+      setLoading(false);
+      setMessage("Please enter a valid phone number.");
+      return;
+    }
+
     const { data: signupData, error: signupError } =
       await supabase.auth.signUp({
-        email: formData.email,
+        email: cleanEmail,
         password: formData.password,
         options: {
           data: {
@@ -61,34 +87,29 @@ export default function SignupPage() {
     }
 
     const user = signupData.user;
+    const session = signupData.session;
 
-    if (!user) {
-      setLoading(false);
-      setMessage(
-        "Signup started. Please check your email to confirm your account, then login."
-      );
-      return;
-    }
+    if (session && user) {
+      const { error: profileError } = await supabase.from("profiles").upsert({
+        id: user.id,
+        full_name: formData.full_name,
+        email: cleanEmail,
+        role: "member",
+      });
 
-    const { error: profileError } = await supabase.from("profiles").upsert({
-      id: user.id,
-      full_name: formData.full_name,
-      email: formData.email,
-      role: "member",
-    });
-
-    if (profileError) {
-      setLoading(false);
-      setMessage(profileError.message);
-      return;
+      if (profileError) {
+        setLoading(false);
+        setMessage(profileError.message);
+        return;
+      }
     }
 
     const { error: signupInfoError } = await supabase
       .from("member_signups")
       .insert({
-        user_id: user.id,
+        user_id: session && user ? user.id : null,
         full_name: formData.full_name,
-        email: formData.email,
+        email: cleanEmail,
         phone: formData.phone || null,
         pcf_cell: formData.pcf_cell || null,
         kingschat_id: formData.kingschat_id || null,
@@ -112,7 +133,7 @@ export default function SignupPage() {
     }
 
     setLoading(false);
-    router.push("/dashboard");
+    router.push("/signup/success");
   }
 
   return (
@@ -194,6 +215,7 @@ export default function SignupPage() {
                   value={formData.email}
                   onChange={updateField}
                   placeholder="you@example.com"
+                  pattern="^[^\s@]+@[^\s@]+\.[^\s@]{2,}$"
                   className="mt-2 w-full rounded-2xl border border-white/20 bg-white/90 px-4 py-3 text-sm text-[#101B3D] outline-none placeholder:text-gray-400 focus:border-[#F7E7CE]"
                 />
               </div>
@@ -223,6 +245,8 @@ export default function SignupPage() {
                 <input
                   name="phone"
                   type="tel"
+                  inputMode="numeric"
+                  pattern="[0-9]*"
                   value={formData.phone}
                   onChange={updateField}
                   placeholder="080..."
