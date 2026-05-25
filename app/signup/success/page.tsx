@@ -1,17 +1,14 @@
 export default function SignupSuccessPage() {
   return (
     <main className="relative min-h-screen overflow-hidden bg-[#101B3D] text-white">
-      <video
-        autoPlay
-        muted
-        loop
-        playsInline
-        className="absolute inset-0 h-full w-full object-cover"
-      >
-        <source src="/twcc-hero-video.mp4" type="video/mp4" />
-      </video>
+      <div
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage: "url('/signup-success.jpg')",
+        }}
+      />
 
-      <div className="absolute inset-0 bg-[#101B3D]/85" />
+      <div className="absolute inset-0 bg-[#101B3D]/70" />
 
       <header className="absolute left-0 right-0 top-0 z-20 px-4 py-5">
         <div className="mx-auto flex max-w-6xl items-center justify-between">
@@ -54,8 +51,13 @@ export default function SignupSuccessPage() {
             <ul className="mt-3 space-y-2 text-sm leading-6 text-white/70">
               <li>• Confirm your email from your inbox.</li>
               <li>• Login after confirmation.</li>
-              <li>• Your dashboard will show maintenance while access is being prepared.</li>
-              <li>• TWCC admin can review your submitted member information.</li>
+              <li>
+                • Your dashboard will show maintenance while access is being
+                prepared.
+              </li>
+              <li>
+                • TWCC admin can review your submitted member information.
+              </li>
             </ul>
           </div>
 

@@ -11,6 +11,8 @@ function isValidEmail(email: string) {
 export default function SignupPage() {
   const router = useRouter();
 
+  const today = new Date().toISOString().split("T")[0];
+
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
 
@@ -66,6 +68,21 @@ export default function SignupPage() {
     if (formData.phone && formData.phone.length < 7) {
       setLoading(false);
       setMessage("Please enter a valid phone number.");
+      return;
+    }
+
+    if (formData.date_of_birth && formData.date_of_birth > today) {
+      setLoading(false);
+      setMessage("Date of birth cannot be in the future.");
+      return;
+    }
+
+    if (
+      formData.wedding_anniversary &&
+      formData.wedding_anniversary > today
+    ) {
+      setLoading(false);
+      setMessage("Wedding anniversary cannot be in the future.");
       return;
     }
 
@@ -333,6 +350,7 @@ export default function SignupPage() {
                   type="date"
                   value={formData.date_of_birth}
                   onChange={updateField}
+                  max={today}
                   className="mt-2 w-full rounded-2xl border border-white/20 bg-white/90 px-4 py-3 text-sm text-[#101B3D] outline-none focus:border-[#F7E7CE]"
                 />
               </div>
@@ -366,6 +384,7 @@ export default function SignupPage() {
                     type="date"
                     value={formData.wedding_anniversary}
                     onChange={updateField}
+                    max={today}
                     className="mt-2 w-full rounded-2xl border border-white/20 bg-white/90 px-4 py-3 text-sm text-[#101B3D] outline-none focus:border-[#F7E7CE]"
                   />
                 </div>
