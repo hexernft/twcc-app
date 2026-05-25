@@ -116,7 +116,7 @@ export default function DashboardPage() {
   return (
     <div className="min-h-screen px-4 py-6 text-[#1F2937]">
       <div className="mx-auto max-w-6xl">
-        <header className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <header className="mb-8 flex items-start justify-between gap-4">
           <div>
             <p className="text-sm font-bold uppercase tracking-[0.24em] text-[#D4AF37]">
               TWCC
@@ -131,11 +131,7 @@ export default function DashboardPage() {
             </p>
           </div>
 
-          <div className="flex flex-wrap items-center gap-3">
-            <button className="rounded-full border border-[#D4AF37]/40 bg-white/95 px-4 py-2 text-sm font-semibold text-[#101B3D] shadow-xl backdrop-blur-md">
-              🔔
-            </button>
-
+          <div className="flex shrink-0 flex-col items-end gap-3 sm:flex-row sm:items-center">
             {canOpenAdmin && (
               <a
                 href="/admin"
